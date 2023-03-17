@@ -31,13 +31,14 @@ console.log('result', result);
 
 //! 004
 
-const strTask4 = `http://site.ru https://site.com https://site.org https://hihhi.com сайт урл http://sitesite.com съесть шаверму`;
+const strTask4 = `http://site.ru  съесть шаверму или шаурму`;
 
 const urlChange = (str) => {
-  const reqURL = /[a-z]{4,5}:\/{2}\w*\.[a-z]+/g;
-  const result = str.replace(reqURL, '#');
-  return result;
+  const reqURL = /(?<protocol>[a-z]{4,5}:\/{2})(?<domen>\w*\.[a-z]{2,3})/g;
+  const finish = str.match(reqURL)[0].replace(reqURL, `<a href="$<protocol>$<domen>">$<domen></a>`);
+
+  return finish;
 };
 
 const resultUrl = urlChange(strTask4);
-console.log('resultUrl', resultUrl);
+console.log('resultUrl = ', resultUrl);
